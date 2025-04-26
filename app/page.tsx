@@ -9,7 +9,7 @@ export default function HomePage() {
 
   const targetDate = new Date();
   targetDate.setDate(targetDate.getDate() + 1); // Tomorrow
-  targetDate.setHours(14, 0, 0, 0); // 2 PM
+  targetDate.setHours(20, 0, 0, 0); // 2 PM
 
   useEffect(() => {
     const interval = setInterval(() => {
