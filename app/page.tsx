@@ -28,9 +28,9 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center item bg-orange-900 flex-col">
-      <div className="max-w-2xl h-96  w-full flex items-center bg-black/50 rounded-3xl">
-        <div className=" bg-[#F8873A]/90 h-full w-full flex justify-center items-center rounded-l-3xl">
+    <div className="min-h-screen flex items-center justify-center item bg-orange-900 ">
+      <div className="max-w-2xl h-96  w-full flex flex-col md:flex-row items-center bg-black/50 rounded-3xl">
+        <div className=" bg-[#F8873A]/90 h-full w-full flex justify-center items-center md:rounded-l-3xl rounded-t-3xl md:rounded-t-none">
           <Image src={"/retomamerto.png"} alt="logo" width={150} height={150} />
         </div>
         <form
