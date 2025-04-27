@@ -1,6 +1,6 @@
 import { Schema, models, model } from "mongoose";
 
-const CandidateSchema = new Schema(
+const CandidatesSchema = new Schema(
   {
     name: String,
     email: { type: String, unique: true },
@@ -10,4 +10,4 @@ const CandidateSchema = new Schema(
   { timestamps: true }
 );
 
-export default models.Candidate || model("Candidate", CandidateSchema);
+export default models.Candidates || model("Candidates", CandidatesSchema);

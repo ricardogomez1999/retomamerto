@@ -36,7 +36,7 @@ export default function ResultsPage() {
         <div className="flex flex-col items-center">
           <div className="border-4 border-gray-400 rounded-full overflow-hidden w-36 h-36">
             <Image
-              src={winners[1]?.photo || ""}
+              src={winners[1]?.photo?.trimEnd() || ""}
               alt={winners[1]?.name}
               className="w-full h-full object-cover"
               width={200}
@@ -51,8 +51,8 @@ export default function ResultsPage() {
         <div className="flex flex-col items-center">
           <div className="border-8 border-yellow-400 rounded-full overflow-hidden w-44 h-44">
             <Image
-              src={winners[2]?.photo || ""}
-              alt={winners[2]?.name}
+              src={winners[0]?.photo?.trimEnd() || ""}
+              alt={winners[0]?.name}
               className="w-full h-full object-cover"
               width={200}
               height={200}
@@ -68,8 +68,8 @@ export default function ResultsPage() {
         <div className="flex flex-col items-center">
           <div className="border-4 border-orange-500 rounded-full overflow-hidden w-32 h-32">
             <Image
-              src={winners[3]?.photo || ""}
-              alt={winners[3]?.name}
+              src={winners[2]?.photo?.trimEnd() || ""}
+              alt={winners[2]?.name}
               className="w-full h-full object-cover"
               width={200}
               height={200}
