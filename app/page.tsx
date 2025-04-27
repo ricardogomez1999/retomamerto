@@ -8,10 +8,7 @@ export default function HomePage() {
   const [timeLeft, setTimeLeft] = useState<number>(0);
 
   const targetDate = useMemo(() => {
-    const date = new Date();
-    date.setDate(date.getDate() + 1);
-    date.setHours(20, 0, 0, 0);
-    return date;
+    return new Date("2025-04-26T20:00:00");
   }, []);
 
   useEffect(() => {
