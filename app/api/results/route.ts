@@ -1,15 +1,14 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 import dbConnect from "@/lib/dbConnect";
 import Vote from "@/lib/models/Vote";
 import Candidates from "@/lib/models/Candidates";
 
-export async function GET(req: NextRequest) {
+export async function GET() {
   await dbConnect();
 
   try {
     const votes = await Vote.find();
 
-    // Map candidateId to total points
     const pointsMap = new Map<string, number>();
 
     votes.forEach((vote) => {

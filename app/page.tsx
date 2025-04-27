@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 
@@ -7,9 +7,12 @@ export default function HomePage() {
   const router = useRouter();
   const [timeLeft, setTimeLeft] = useState<number>(0);
 
-  const targetDate = new Date();
-  targetDate.setDate(targetDate.getDate() + 1); // Tomorrow
-  targetDate.setHours(20, 0, 0, 0); // 2 PM
+  const targetDate = useMemo(() => {
+    const date = new Date();
+    date.setDate(date.getDate() + 1);
+    date.setHours(20, 0, 0, 0);
+    return date;
+  }, []);
 
   useEffect(() => {
     const interval = setInterval(() => {

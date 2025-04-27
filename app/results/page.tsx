@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 type Candidate = {
   _id: string;
@@ -12,7 +12,6 @@ type Candidate = {
 
 export default function ResultsPage() {
   const [winners, setWinners] = useState<Candidate[]>([]);
-  const router = useRouter();
 
   useEffect(() => {
     fetch("/api/results")
@@ -36,10 +35,12 @@ export default function ResultsPage() {
         {/* Second Place */}
         <div className="flex flex-col items-center">
           <div className="border-4 border-gray-400 rounded-full overflow-hidden w-36 h-36">
-            <img
+            <Image
               src={winners[1]?.photo || ""}
               alt={winners[1]?.name}
               className="w-full h-full object-cover"
+              width={200}
+              height={200}
             />
           </div>
           <p className="text-white mt-2 font-semibold">{winners[1]?.name}</p>
@@ -49,10 +50,12 @@ export default function ResultsPage() {
         {/* First Place */}
         <div className="flex flex-col items-center">
           <div className="border-8 border-yellow-400 rounded-full overflow-hidden w-44 h-44">
-            <img
-              src={winners[0]?.photo || ""}
-              alt={winners[0]?.name}
+            <Image
+              src={winners[2]?.photo || ""}
+              alt={winners[2]?.name}
               className="w-full h-full object-cover"
+              width={200}
+              height={200}
             />
           </div>
           <p className="text-white mt-2 font-bold text-lg">
@@ -64,10 +67,12 @@ export default function ResultsPage() {
         {/* Third Place */}
         <div className="flex flex-col items-center">
           <div className="border-4 border-orange-500 rounded-full overflow-hidden w-32 h-32">
-            <img
-              src={winners[2]?.photo || ""}
-              alt={winners[2]?.name}
+            <Image
+              src={winners[3]?.photo || ""}
+              alt={winners[3]?.name}
               className="w-full h-full object-cover"
+              width={200}
+              height={200}
             />
           </div>
           <p className="text-white mt-2 font-semibold">{winners[2]?.name}</p>
