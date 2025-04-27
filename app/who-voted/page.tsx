@@ -51,7 +51,9 @@ export default function WhoVotedPage() {
             className="bg-black/40 p-6 rounded-xl flex flex-col items-center text-white"
           >
             <Image
-              src={vote.voter.photo || "https://placehold.co/100x100"}
+              src={
+                vote.voter.photo?.trimEnd() || "https://placehold.co/100x100"
+              }
               alt={vote.voter.name}
               className="w-24 h-24 rounded-full object-cover mb-4"
               width={200}

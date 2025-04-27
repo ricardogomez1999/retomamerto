@@ -4,12 +4,12 @@ const VoteSchema = new Schema(
   {
     candidateId: {
       type: Schema.Types.ObjectId,
-      ref: "Candidates",
+      ref: "Candidate",
       unique: true,
     },
-    firstPlace: { type: Schema.Types.ObjectId, ref: "Candidates" },
-    secondPlace: { type: Schema.Types.ObjectId, ref: "Candidates" },
-    thirdPlace: { type: Schema.Types.ObjectId, ref: "Candidates" },
+    firstPlace: { type: Schema.Types.ObjectId, ref: "Candidate" },
+    secondPlace: { type: Schema.Types.ObjectId, ref: "Candidate" },
+    thirdPlace: { type: Schema.Types.ObjectId, ref: "Candidate" },
   },
   { timestamps: true }
 );

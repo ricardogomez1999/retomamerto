@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import dbConnect from "@/lib/dbConnect";
-import Candidates from "@/lib/models/Candidates";
+import Candidates from "@/lib/models/Candidate";
 import Vote from "@/lib/models/Vote";
 
 export async function POST(req: NextRequest) {

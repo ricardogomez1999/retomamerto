@@ -10,4 +10,4 @@ const CandidatesSchema = new Schema(
   { timestamps: true }
 );
 
-export default models.Candidates || model("Candidates", CandidatesSchema);
+export default models.Candidate || model("Candidate", CandidatesSchema);

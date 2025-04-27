@@ -31,7 +31,7 @@ export default function ResultsPage() {
         🏆 Resultados Finales
       </h1>
 
-      <div className="flex justify-center items-end gap-6">
+      <div className="flex justify-center items-center md:items-end gap-6 flex-col md:flex-row">
         {/* Second Place */}
         <div className="flex flex-col items-center">
           <div className="border-4 border-gray-400 rounded-full overflow-hidden w-36 h-36">
@@ -49,7 +49,7 @@ export default function ResultsPage() {
 
         {/* First Place */}
         <div className="flex flex-col items-center">
-          <div className="border-8 border-yellow-400 rounded-full overflow-hidden w-44 h-44">
+          <div className="border-6 md:border-8 border-yellow-400 rounded-full overflow-hidden w-40 h-40 md:w-44 md:h-44">
             <Image
               src={winners[0]?.photo?.trimEnd() || ""}
               alt={winners[0]?.name}
