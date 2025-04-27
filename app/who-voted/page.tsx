@@ -1,4 +1,5 @@
 "use client";
+import Image from "next/image";
 import { useEffect, useState } from "react";
 
 type VotedInfo = {
@@ -49,10 +50,12 @@ export default function WhoVotedPage() {
             key={idx}
             className="bg-black/40 p-6 rounded-xl flex flex-col items-center text-white"
           >
-            <img
+            <Image
               src={vote.voter.photo || "https://placehold.co/100x100"}
               alt={vote.voter.name}
               className="w-24 h-24 rounded-full object-cover mb-4"
+              width={200}
+              height={200}
             />
             <h2 className="text-xl font-bold">{vote.voter.name}</h2>
 

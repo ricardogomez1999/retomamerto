@@ -1,9 +1,8 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 import dbConnect from "@/lib/dbConnect";
 import Vote from "@/lib/models/Vote";
-import Candidates from "@/lib/models/Candidates";
 
-export async function GET(req: NextRequest) {
+export async function GET() {
   await dbConnect();
 
   try {
