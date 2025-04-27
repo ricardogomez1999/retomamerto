@@ -16,7 +16,7 @@ export default function ResultsPage() {
   useEffect(() => {
     fetch("/api/results")
       .then((res) => res.json())
-      .then((data) => setWinners(data.slice(0, 3))); // Only top 3
+      .then((data) => setWinners(data.slice(0, 6))); // Adjusted to top 6
   }, []);
 
   if (winners.length < 3) {
@@ -79,6 +79,35 @@ export default function ResultsPage() {
           <p className="text-gray-300 text-sm">{winners[2]?.points} puntos</p>
         </div>
       </div>
+
+      {winners.length > 3 && (
+        <div className="mt-12 bg-black/30 rounded-xl p-6 w-full max-w-4xl">
+          <h2 className="text-2xl font-bold text-white mb-6 text-center">
+            🏅 Otros Finalistas
+          </h2>
+          <table className="w-full text-white table-auto">
+            <thead>
+              <tr className="border-b border-gray-500">
+                <th className="py-2">Lugar</th>
+                <th className="py-2">Nombre</th>
+                <th className="py-2">Puntos</th>
+              </tr>
+            </thead>
+            <tbody>
+              {winners.slice(3, 6).map((candidate, index) => (
+                <tr
+                  key={candidate._id}
+                  className="text-center border-b border-gray-700"
+                >
+                  <td className="py-2">{index + 4}°</td>
+                  <td className="py-2">{candidate.name}</td>
+                  <td className="py-2">{candidate.points}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
     </div>
   );
 }
