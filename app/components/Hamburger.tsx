@@ -5,7 +5,7 @@ import { useState } from "react";
 import Link from "next/link";
 
 export default function Hamburguer() {
-  let [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
   return (
     <div className=" flex lg:hidden">
       <button onClick={() => setIsOpen(true)}>
