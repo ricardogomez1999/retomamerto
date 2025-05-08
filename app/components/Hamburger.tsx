@@ -1,64 +1,70 @@
-import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react";
-import { Bars3Icon } from "@heroicons/react/16/solid";
+import {
+  Description,
+  Dialog,
+  DialogPanel,
+  DialogTitle,
+} from "@headlessui/react";
+import { Bars3Icon, XMarkIcon } from "@heroicons/react/16/solid";
 import { AnimatePresence, motion } from "framer-motion";
-
+import { useState } from "react";
 import Link from "next/link";
 
 export default function Hamburguer() {
+  let [isOpen, setIsOpen] = useState(false);
   return (
     <div className=" flex lg:hidden">
-      <Menu>
-        {({ open }) => (
-          <div className="flex">
-            <MenuButton>
-              <Bars3Icon width={30} height={30} className=" text-white" />
-            </MenuButton>
-            <AnimatePresence>
-              {open && (
-                <MenuItems
-                  static
-                  as={motion.div}
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.95 }}
-                  anchor="bottom end"
-                  className=" data-[closed]:scale-95 data-[closed]:opacity-0 gap-5  p-3 text-white justify-between font-bold bg-[#838383] w-fit m-auto rounded-lg z-50"
+      <button onClick={() => setIsOpen(true)}>
+        <Bars3Icon className=" text-white" width={30} height={30} />
+      </button>
+      <AnimatePresence>
+        {isOpen && (
+          <Dialog
+            static
+            open={isOpen}
+            onClose={() => setIsOpen(false)}
+            className="relative z-50"
+          >
+            <div className="fixed inset-0 flex items-center justify-center">
+              <motion.div
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.95 }}
+                transition={{ duration: 0.3 }}
+                className="w-full h-full bg-black p-12"
+              >
+                <div className="flex flex-row-reverse gap-4 text-white">
+                  <button onClick={() => setIsOpen(false)}>
+                    <XMarkIcon width={30} height={30} />
+                  </button>
+                </div>
+                <ul className=" flex flex-col justify-between gap-10 text-3xl text-white mt-10">
+                  <li>
+                    <Link href={"/rules"}>
+                      <p>Reglamento</p>
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href={"/us"}>
+                      <p>Acerca</p>
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href={"/events"}>
+                      <p>Calendario</p>
+                    </Link>
+                  </li>
+                </ul>
+                <Link
+                  href={"registration"}
+                  className=" bg-orange-500 h-16 px-5 rounded-xl text-white text-lg font-light flex justify-center items-center mt-10"
                 >
-                  <MenuItem>
-                    <Link
-                      className="block data-[focus]:bg-[#838383] p-3 rounded"
-                      href="/pricing"
-                    >
-                      Reglamento
-                    </Link>
-                  </MenuItem>
-                  <MenuItem>
-                    <Link
-                      className="block data-[focus]:bg-[#838383] p-3 rounded"
-                      href="/company"
-                    >
-                      Acerca
-                    </Link>
-                  </MenuItem>
-                  <MenuItem>
-                    <a
-                      className="block data-[focus]:bg-[#838383] p-3 rounded"
-                      href="/blog"
-                    >
-                      Calendario
-                    </a>
-                  </MenuItem>
-                  <MenuItem>
-                    <button className=" bg-orange-500 h-16 px-5 rounded-xl text-white text-lg font-light">
-                      Únete al reto
-                    </button>
-                  </MenuItem>
-                </MenuItems>
-              )}
-            </AnimatePresence>
-          </div>
+                  Únete al reto
+                </Link>
+              </motion.div>
+            </div>
+          </Dialog>
         )}
-      </Menu>
+      </AnimatePresence>
     </div>
   );
 }

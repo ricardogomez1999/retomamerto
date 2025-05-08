@@ -21,9 +21,12 @@ export default function NavBar() {
           </Link>
         </li>
       </ul>
-      <button className=" bg-orange-500 h-16 px-5 rounded-xl text-white text-lg font-light">
+      <Link
+        href={"registration"}
+        className=" bg-orange-500 h-16 px-5 rounded-xl text-white text-lg font-light flex justify-center items-center"
+      >
         Únete al reto
-      </button>
+      </Link>
     </div>
   );
 }
