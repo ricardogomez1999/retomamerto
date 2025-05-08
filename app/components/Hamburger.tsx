@@ -22,14 +22,14 @@ export default function Hamburguer() {
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0, scale: 0.95 }}
                   anchor="bottom end"
-                  className=" data-[closed]:scale-95 data-[closed]:opacity-0 gap-5  p-3 text-white justify-between font-bold bg-[#284F77]/70 w-fit m-auto rounded-lg z-50"
+                  className=" data-[closed]:scale-95 data-[closed]:opacity-0 gap-5  p-3 text-white justify-between font-bold bg-[#838383] w-fit m-auto rounded-lg z-50"
                 >
                   <MenuItem>
                     <Link
                       className="block data-[focus]:bg-[#838383] p-3 rounded"
                       href="/pricing"
                     >
-                      Pricing
+                      Reglamento
                     </Link>
                   </MenuItem>
                   <MenuItem>
@@ -37,25 +37,22 @@ export default function Hamburguer() {
                       className="block data-[focus]:bg-[#838383] p-3 rounded"
                       href="/company"
                     >
-                      Company
+                      Acerca
                     </Link>
-                  </MenuItem>
-                  {/* <MenuItem>
-                    <a
-                      className="block data-[focus]:bg-[#284F77] p-3 rounded"
-                      href="/blog"
-                    >
-                      Blog
-                    </a>
                   </MenuItem>
                   <MenuItem>
                     <a
-                      className="block data-[focus]:bg-[#284F77] p-3 rounded"
-                      href="/login"
+                      className="block data-[focus]:bg-[#838383] p-3 rounded"
+                      href="/blog"
                     >
-                      Login
+                      Calendario
                     </a>
-                  </MenuItem> */}
+                  </MenuItem>
+                  <MenuItem>
+                    <button className=" bg-orange-500 h-16 px-5 rounded-xl text-white text-lg font-light">
+                      Únete al reto
+                    </button>
+                  </MenuItem>
                 </MenuItems>
               )}
             </AnimatePresence>
