@@ -1,14 +1,17 @@
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 
 export default function Logo() {
   return (
-    <Image
-      alt="logo"
-      src={"/logo.png"}
-      width={1000}
-      height={1000}
-      className=" w-50 h-10 md:w-36 lg:w-70 lg:h-16"
-    ></Image>
+    <Link href={"/"}>
+      <Image
+        alt="logo"
+        src={"/logo2.png"}
+        width={1000}
+        height={1000}
+        className=" w-10 md:w-36 lg:w-20"
+      ></Image>
+    </Link>
   );
 }
