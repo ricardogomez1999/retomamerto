@@ -1,52 +1,26 @@
 "use client";
-import { useEffect, useState, useMemo } from "react";
-import { useRouter } from "next/navigation";
-import Image from "next/image";
+
+import Header from "./components/Header";
 
 export default function HomePage() {
-  const router = useRouter();
-  const [timeLeft, setTimeLeft] = useState<number>(0);
-
-  const targetDate = useMemo(() => {
-    return new Date("2025-04-26T20:00:00");
-  }, []);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      const now = new Date().getTime();
-      const distance = targetDate.getTime() - now;
-
-      if (distance <= 0) {
-        clearInterval(interval);
-        router.push("/login");
-      } else {
-        setTimeLeft(distance);
-      }
-    }, 1000);
-
-    return () => clearInterval(interval);
-  }, [router, targetDate]);
-
-  const formatTime = (milliseconds: number) => {
-    const totalSeconds = Math.floor(milliseconds / 1000);
-    const hours = Math.floor((totalSeconds % (60 * 60 * 24)) / (60 * 60));
-    const minutes = Math.floor((totalSeconds % (60 * 60)) / 60);
-    const seconds = Math.floor(totalSeconds % 60);
-
-    return `${hours.toString().padStart(2, "0")}:${minutes
-      .toString()
-      .padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
-  };
-
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-orange-900 text-white">
-      <Image src={"/retomamerto.png"} alt="logo" width={150} height={150} />
-      <h1 className="text-3xl md:text-4xl lg:text-6xl text-center font-bold mb-8">
-        ¡Votaciones Reto Mamerto!
-      </h1>
-      <div className="flex text-3xl md:text-4xl lg:text-6xl font-mono">
-        <p>Falta:</p>
-        {formatTime(timeLeft)}
+    <div className="min-h-screen bg-[#ECECEC] relative">
+      <div className=" min-h-9/10 min-w-9/10 absolute inset-3 rounded-xl bg-[url(/bgMamerto.jpg)] bg-center bg-no-repeat bg-cover">
+        <Header />
+        <hr className=" border-white absolute w-1/2 left-10 bottom-72" />
+        <div className="w-px h-full bg-white absolute lg:right-200"></div>
+        <h1 className=" uppercase text-white font-bold absolute left-10 bottom-30 text-7xl w-1/2">
+          Alcanza tus <span className=" text-orange-500">metas</span> fisicas
+        </h1>
+        <div className="flex flex-col gap-4 absolute right-20 bottom-30  w-1/3">
+          <p className=" text-white text-5xl">
+            La mejor forma de lograr tus objetivos
+          </p>
+          <button className=" bg-orange-500 p-10 rounded-lg text-white text-3xl">
+            {" "}
+            Ver requisitos
+          </button>
+        </div>
       </div>
     </div>
   );
