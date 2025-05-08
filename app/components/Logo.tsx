@@ -10,7 +10,7 @@ export default function Logo() {
         src={"/logo2.png"}
         width={1000}
         height={1000}
-        className=" w-10 md:w-36 lg:w-20"
+        className=" w-20"
       ></Image>
     </Link>
   );
