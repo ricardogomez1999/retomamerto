@@ -6,12 +6,12 @@ import Link from "next/link";
 
 export default function Hamburguer() {
   return (
-    <div className=" flex lg:hidden z-50">
+    <div className=" flex lg:hidden">
       <Menu>
         {({ open }) => (
           <div className="flex">
             <MenuButton>
-              <Bars3Icon width={30} height={30} />
+              <Bars3Icon width={30} height={30} className=" text-white" />
             </MenuButton>
             <AnimatePresence>
               {open && (

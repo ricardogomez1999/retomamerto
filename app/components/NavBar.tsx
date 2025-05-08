@@ -4,7 +4,7 @@ import React from "react";
 export default function NavBar() {
   return (
     <div className=" md:flex items-center gap-0 md:gap-14 lg:gap-28 hidden">
-      <ul className=" flex justify-between md:gap-10 lg:gap-14 font-light md:text-lg lg:text-xl">
+      <ul className=" flex justify-between md:gap-10 lg:gap-14 font-light md:text-lg lg:text-xl text-white">
         <li>
           <Link href={"/rules"}>
             <p>Reglamento</p>
