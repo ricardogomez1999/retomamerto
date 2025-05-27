@@ -56,7 +56,7 @@ export async function POST(req: NextRequest) {
   }
 }
 
-function isValidationError(
+export function isValidationError(
   error: unknown
 ): error is { name: string; message: string } {
   return (
