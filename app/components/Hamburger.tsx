@@ -1,3 +1,4 @@
+"use client";
 import { Dialog } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/16/solid";
 import { AnimatePresence, motion } from "framer-motion";
@@ -7,7 +8,7 @@ import Link from "next/link";
 export default function Hamburguer() {
   const [isOpen, setIsOpen] = useState(false);
   return (
-    <div className=" flex lg:hidden">
+    <div className=" flex md:hidden">
       <button onClick={() => setIsOpen(true)}>
         <Bars3Icon className=" text-white" width={30} height={30} />
       </button>
@@ -25,7 +26,7 @@ export default function Hamburguer() {
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.95 }}
                 transition={{ duration: 0.3 }}
-                className="w-full h-full bg-black p-12"
+                className="w-full h-full bg-black p-7"
               >
                 <div className="flex flex-row-reverse gap-4 text-white">
                   <button onClick={() => setIsOpen(false)}>
