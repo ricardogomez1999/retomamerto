@@ -20,6 +20,10 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
+## Environment Variables
+
+This app requires a MongoDB connection string. Define the `MONGODB_URI` environment variable (for example in a `.env.local` file) before starting the server. Running the app without this variable causes `lib/dbConnect.ts` to throw an error during initialization.
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:
