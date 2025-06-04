@@ -1,4 +1,4 @@
-import { isValidationError } from '../app/api/candidates/route';
+import { isValidationError } from '../lib/isValidationError';
 
 describe('isValidationError', () => {
   it('returns true for mongoose validation errors', () => {
