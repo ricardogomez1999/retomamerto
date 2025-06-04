@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import dbConnect from "@/lib/dbConnect";
 import Candidates from "@/lib/models/Candidates";
+import { isValidationError } from "@/lib/isValidationError";
 
 export async function GET(req: NextRequest) {
   await dbConnect();
@@ -48,21 +49,10 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    console.error(err); // good practice
+    console.error(err);
     return NextResponse.json(
       { message: "Internal Server Error" },
       { status: 500 }
     );
   }
-}
-
-export function isValidationError(
-  error: unknown
-): error is { name: string; message: string } {
-  return (
-    typeof error === "object" &&
-    error !== null &&
-    "name" in error &&
-    error.name === "ValidationError"
-  );
 }
