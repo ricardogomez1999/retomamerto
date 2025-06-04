@@ -24,6 +24,7 @@ export default function ContactFormSection() {
 
   return (
     <section className="py-10 bg-black text-white flex flex-col items-center">
+
       <h2 className="text-center text-3xl font-bold mb-6">
         ¿Te interesa participar?
       </h2>
