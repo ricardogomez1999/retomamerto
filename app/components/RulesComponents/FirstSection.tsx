@@ -29,13 +29,13 @@ export default function FirstSection() {
         </ul>
       </div>
       <div className=" w-1/2 p-5 relative">
-        <div className="absolute inset-0 bg-black z-10 rounded-xl" />
+        <div className="absolute inset-0 bg-black/60 z-10 rounded-xl" />
         <Image
           src={"/FirstSection.png"}
           alt="First section"
           width={1500}
           height={1500}
-          className=" w-full relative rounded-xl"
+          className=" w-full h-full object-cover relative rounded-xl"
         />
       </div>
     </section>
