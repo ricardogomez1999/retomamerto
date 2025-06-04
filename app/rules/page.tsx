@@ -1,6 +1,9 @@
 "use client";
 
 import FirstSection from "../components/RulesComponents/FirstSection";
+import GallerySection from "../components/RulesComponents/GallerySection";
+import RulesMenuSection from "../components/RulesComponents/RulesMenuSection";
+import ContactFormSection from "../components/RulesComponents/ContactFormSection";
 
 export default function RulesPage() {
   return (
@@ -11,6 +14,9 @@ export default function RulesPage() {
         </h1>
       </section>
       <FirstSection />
+      <GallerySection />
+      <RulesMenuSection />
+      <ContactFormSection />
     </main>
   );
 }

@@ -3,9 +3,11 @@ import React from "react";
 
 export default function FirstSection() {
   return (
-    <section className=" flex w-3/4 m-auto my-24">
-      <div className=" w-1/2 p-5">
-        <ul className=" text-xl flex flex-col gap-10 justify-center items-center">
+    <section className="flex flex-col md:flex-row w-11/12 md:w-3/4 m-auto my-24">
+      <div className="w-full md:w-1/2 p-5 order-last md:order-first">
+        <ul
+          className="text-base md:text-lg lg:text-xl flex flex-col gap-6 justify-center items-center overflow-y-auto max-h-80"
+        >
           <li>
             Reto Mamerto combina entrenamiento físico, disciplina personal y
             contenido digital, donde los participantes documentan su evolución
@@ -28,14 +30,14 @@ export default function FirstSection() {
           </li>
         </ul>
       </div>
-      <div className=" w-1/2 p-5 relative">
-        <div className="absolute inset-0 bg-black z-10 rounded-xl" />
+      <div className="w-full md:w-1/2 p-5 relative">
+        <div className="absolute inset-0 bg-black/60 z-10 rounded-xl" />
         <Image
           src={"/FirstSection.png"}
           alt="First section"
           width={1500}
           height={1500}
-          className=" w-full relative rounded-xl"
+          className="w-full h-full object-cover relative rounded-xl"
         />
       </div>
     </section>
