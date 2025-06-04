@@ -49,11 +49,10 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    console.error(err); // good practice
+    console.error(err);
     return NextResponse.json(
       { message: "Internal Server Error" },
       { status: 500 }
     );
   }
 }
-
