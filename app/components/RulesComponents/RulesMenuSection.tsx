@@ -8,9 +8,11 @@ export default function RulesMenuSection() {
     "Seguir las indicaciones de los entrenadores y organizadores",
   ];
   return (
-    <section className="py-10 bg-orange-500 text-black">
-      <h2 className="text-center text-3xl font-bold mb-6">Reglamento</h2>
-      <ul className="w-3/4 mx-auto flex flex-col gap-4 list-disc pl-5">
+    <section className="py-10 bg-orange-900 text-black">
+      <h2 className="text-center text-white text-3xl font-bold mb-6">
+        Reglamento
+      </h2>
+      <ul className="w-3/4 mx-auto text-white flex flex-col gap-4 list-disc pl-5">
         {rules.map((rule, idx) => (
           <li key={idx}>{rule}</li>
         ))}
