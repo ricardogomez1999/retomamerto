@@ -46,9 +46,7 @@ export default function ContactFormSection() {
           value={form.lastName}
           onChange={handleChange}
           required
-
           className="p-2 rounded text-black placeholder-gray-400"
-
         />
         <input
           type="number"
@@ -57,9 +55,7 @@ export default function ContactFormSection() {
           value={form.age}
           onChange={handleChange}
           required
-
           className="p-2 rounded text-black placeholder-gray-400"
-
         />
         <input
           type="email"
@@ -68,7 +64,6 @@ export default function ContactFormSection() {
           value={form.email}
           onChange={handleChange}
           required
-
           className="p-2 rounded text-black placeholder-gray-400"
         />
         <button
