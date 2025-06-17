@@ -4,6 +4,7 @@ const UserSchema = new Schema(
   {
     name: { type: String, required: true },
     email: { type: String, unique: true, required: true },
+    password: { type: String, required: true, select: false },
     photo: String,
     age: Number,
     sex: String,
@@ -15,5 +16,13 @@ const UserSchema = new Schema(
   },
   { timestamps: true }
 );
+
+UserSchema.pre("save", async function (next) {
+  if (!this.isModified("password")) return next();
+  const bcrypt = await import("bcryptjs");
+  this.password = await bcrypt.hash(this.password, 10);
+  next();
+});
+
 
 export default models.User || model("User", UserSchema);
