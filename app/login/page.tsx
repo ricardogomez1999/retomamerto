@@ -5,16 +5,17 @@ import Image from "next/image";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const router = useRouter();
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    const res = await fetch("/api/auth/login", {
+    const res = await fetch("/api/auth/user-login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email }),
+      body: JSON.stringify({ email, password }),
     });
 
     const data = await res.json();
@@ -22,8 +23,8 @@ export default function LoginPage() {
     if (!res.ok) {
       setError(data.message || "El Login fallo");
     } else {
-      localStorage.setItem("voter", JSON.stringify(data.candidate));
-      router.push("/vote");
+      localStorage.setItem("user", JSON.stringify(data));
+      router.push("/profile");
     }
   };
 
@@ -45,6 +46,14 @@ export default function LoginPage() {
             placeholder="Ingresa tu email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            required
+            className="w-full px-4 py-2 mb-2 border rounded"
+          />
+          <input
+            type="password"
+            placeholder="Ingresa tu contraseña"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
             required
             className="w-full px-4 py-2 mb-2 border rounded"
           />

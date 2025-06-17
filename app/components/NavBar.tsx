@@ -34,7 +34,7 @@ export default function NavBar({ vertical = false }: { vertical?: boolean }) {
         </li>
       </ul>
       <Link
-        href={"registration"}
+        href={"signup"}
         className={`bg-orange-500 h-16 px-5 rounded-xl text-white text-lg font-light flex justify-center items-center${vertical ? " mt-4" : ""}`}
       >
         Únete al reto

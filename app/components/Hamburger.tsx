@@ -51,7 +51,7 @@ export default function Hamburguer() {
                   </li>
                 </ul>
                 <Link
-                  href={"registration"}
+                  href={"signup"}
                   className=" bg-orange-500 h-16 px-5 rounded-xl text-white text-lg font-light flex justify-center items-center mt-10"
                 >
                   Únete al reto
