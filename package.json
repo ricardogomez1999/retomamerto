@@ -9,6 +9,7 @@
     "start": "next start",
     "lint": "next lint",
     "seed": "ts-node --esm scripts/seedCandidates.ts",
+    "create-user": "ts-node --esm scripts/createUser.ts",
     "test": "jest"
   },
   "dependencies": {

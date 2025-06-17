@@ -24,6 +24,16 @@ This project uses [`next/font`](https://nextjs.org/docs/app/building-your-applic
 
 This app requires a MongoDB connection string. Define the `MONGODB_URI` environment variable (for example in a `.env.local` file) before starting the server. Running the app without this variable causes `lib/dbConnect.ts` to throw an error during initialization.
 
+### Creating Users
+
+To create a user directly from the command line run:
+
+```bash
+npm run create-user -- <email> <password> <name> [age]
+```
+
+The script connects to your MongoDB instance using `MONGODB_URI` and stores the new user.
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:
