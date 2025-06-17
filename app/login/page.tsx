@@ -38,7 +38,7 @@ export default function LoginPage() {
           className=" w-full flex flex-col items-center justify-center gap-5 h-full p-5"
         >
           <h1 className="text-2xl font-bold mb-4 text-white">
-            Ingresa para votar
+            Ingresa para ver tu progreso
           </h1>
           <input
             type="email"
