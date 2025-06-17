@@ -20,7 +20,7 @@ export default function ProfilePage() {
   const [routines, setRoutines] = useState<{ name: string; description: string }[]>([]);
 
   useEffect(() => {
-    const stored = localStorage.getItem("voter");
+    const stored = localStorage.getItem("user");
     if (stored) {
       const candidate = JSON.parse(stored) as { _id: string };
       fetch(`/api/users/${candidate._id}`)
