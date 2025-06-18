@@ -5,8 +5,9 @@ import Link from "next/link";
 
 export default function Footer() {
   return (
-    <footer className=" bg-orange-950 text-white py-10">
-      <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
+    <footer className=" bg-black text-white py-10">
+      <hr className=" text-orange-400 border-2 w-3/4 m-auto" />
+      <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 mt-10">
         <div className="flex justify-center md:justify-start">
           <Logo />
         </div>
@@ -15,12 +16,9 @@ export default function Footer() {
         </div>
         <div className="flex flex-col items-center md:items-end justify-center gap-1">
           <p className="font-light">Contacto</p>
-          <p>Teléfono: +1 234 567 8901</p>
-          <Link
-            href="mailto:retomamerto@example.com"
-            className="text-orange-500"
-          >
-            retomamerto@example.com
+          <p>Teléfono: +52 844 350 6065</p>
+          <Link href="mailto:info@retomamerto.com" className="text-orange-500">
+            info@retomamerto.com
           </Link>
         </div>
       </div>

@@ -35,17 +35,17 @@ export default function Hamburguer() {
                 </div>
                 <ul className=" flex flex-col justify-between gap-10 text-3xl text-white mt-10">
                   <li>
-                    <Link href={"/rules"}>
+                    <Link href={"/rules"} onClick={() => setIsOpen(false)}>
                       <p>Reglamento</p>
                     </Link>
                   </li>
                   <li>
-                    <Link href={"/us"}>
+                    <Link href={"/us"} onClick={() => setIsOpen(false)}>
                       <p>Acerca</p>
                     </Link>
                   </li>
                   <li>
-                    <Link href={"/events"}>
+                    <Link href={"/events"} onClick={() => setIsOpen(false)}>
                       <p>Calendario</p>
                     </Link>
                   </li>
