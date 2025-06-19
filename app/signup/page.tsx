@@ -35,8 +35,8 @@ export default function SignUpPage() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col gap-10 items-center justify-center bg-orange-900">
-      <div className="max-w-2xl w-full flex flex-col md:flex-row bg-black/50 rounded-3xl h-[500px]">
+    <div className="min-h-screen flex flex-col gap-10 items-center justify-center bg-orange-900 p-5">
+      <div className="max-w-2xl w-full flex flex-col md:flex-row bg-black/50 rounded-3xl md:h-[500px] ">
         <div className="bg-[#F8873A]/90 h-full w-full flex justify-center items-center md:rounded-l-3xl rounded-t-3xl md:rounded-t-none">
           <Image src="/logo2.png" alt="logo" width={150} height={150} />
         </div>
