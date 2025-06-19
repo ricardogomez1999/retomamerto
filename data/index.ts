@@ -1,4 +1,4 @@
-const ruleSections = [
+const usSections = [
   {
     title: "¿Que es el reto mamerto?",
     text: "Cada edición del reto se desarrolla a lo largo de 5 meses,integrando actividades físicas como hikes, levantamiento de pesas,carreras y entrenamientos funcionales",
@@ -21,4 +21,4 @@ const ruleSections = [
   },
 ];
 
-export default ruleSections;
+export default usSections;
