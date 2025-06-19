@@ -12,8 +12,8 @@ export default function LoginPage() {
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    const res = await fetch("/api/auth/user-login", {
-      method: "POST",
+    const res = await fetch("/api/auth/login", {
+      method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email, password }),
     });
@@ -32,7 +32,7 @@ export default function LoginPage() {
     <div className="min-h-screen flex items-center justify-center item bg-orange-900 ">
       <div className="max-w-2xl h-96  w-full flex flex-col md:flex-row items-center bg-black/50 rounded-3xl">
         <div className=" bg-[#F8873A]/90 h-full w-full flex justify-center items-center md:rounded-l-3xl rounded-t-3xl md:rounded-t-none">
-          <Image src={"/retomamerto.png"} alt="logo" width={150} height={150} />
+          <Image src={"/logo2.png"} alt="logo" width={150} height={150} />
         </div>
         <form
           onSubmit={handleLogin}
@@ -47,7 +47,7 @@ export default function LoginPage() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
-            className="w-full px-4 py-2 mb-2 border rounded"
+            className="w-full px-4 py-2 mb-2 border rounded bg-white text-black"
           />
           <input
             type="password"
@@ -55,7 +55,7 @@ export default function LoginPage() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
-            className="w-full px-4 py-2 mb-2 border rounded"
+            className="w-full px-4 py-2 mb-2 border rounded bg-white text-black"
           />
           {error && <p className="text-orange-900 text-sm mb-2">{error}</p>}
           <button className="w-full bg-[#F8873A] text-white py-2 rounded hover:bg-[#F8873A]/80 font-bold  cursor-pointer">

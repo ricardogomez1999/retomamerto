@@ -1,30 +1,33 @@
 import { NextRequest, NextResponse } from "next/server";
 import dbConnect from "@/lib/dbConnect";
-import Candidates from "@/lib/models/Candidates";
-import Vote from "@/lib/models/Vote";
+import Users from "@/lib/models/User";
+import bcrypt from "bcryptjs";
 
-export async function POST(req: NextRequest) {
+export async function PUT(req: NextRequest) {
   await dbConnect();
-  const { email } = await req.json();
+  const { email, password } = await req.json();
 
   try {
-    const candidate = await Candidates.findOne({ email });
-    if (!candidate) {
+    const user = await Users.findOne({ email });
+    if (!user) {
       return NextResponse.json(
-        { message: "Unauthorized: Email not registered" },
+        { message: "Usuario no valido" },
         { status: 401 }
       );
     }
 
-    const hasVoted = await Vote.findOne({ candidateId: candidate._id });
-    if (hasVoted) {
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) {
       return NextResponse.json(
-        { message: "You have already voted" },
-        { status: 403 }
+        { message: "Contraseña incorrecta" },
+        { status: 401 }
       );
     }
 
-    return NextResponse.json({ candidate }, { status: 200 });
+    return NextResponse.json(
+      { message: "Login successful", user },
+      { status: 200 }
+    );
   } catch (err) {
     return NextResponse.json(
       { message: "Internal Server Error", error: err },
