@@ -8,7 +8,7 @@ export default function FirstSection() {
       {ruleSections.map((section, index) => (
         <section
           key={index}
-          className={`flex flex-col-reverse md:flex-row w-11/12 md:w-3/4 md:h-96 m-auto md:my-48 my-10 ${
+          className={`flex flex-col-reverse md:flex-row w-11/12 md:w-3/4 md:h-96 m-auto md:my-48 my-10 bg-black ${
             index % 2 === 1 ? "md:flex-row" : "md:flex-row-reverse"
           }`}
         >
