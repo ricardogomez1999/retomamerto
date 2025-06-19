@@ -3,12 +3,14 @@ import dbConnect from "@/lib/dbConnect";
 import User from "@/lib/models/User";
 
 export async function GET(
-  _req: NextRequest,
-  { params }: { params: { id: string } }
+  req: NextRequest,
+  { params }: { params: Promise<{ id: string }> }
 ) {
+  const id = (await params).id;
+
   await dbConnect();
   try {
-    const user = await User.findById(params.id);
+    const user = await User.findById(id);
     if (!user) {
       return NextResponse.json({ message: "User not found" }, { status: 404 });
     }
@@ -23,8 +25,10 @@ export async function GET(
 
 export async function PUT(
   req: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
+  const id = (await params).id;
+
   await dbConnect();
   const role = req.headers.get("x-role") || "user";
   const body = await req.json();
@@ -37,7 +41,7 @@ export async function PUT(
   }
 
   try {
-    const user = await User.findByIdAndUpdate(params.id, body, {
+    const user = await User.findByIdAndUpdate(id, body, {
       new: true,
       runValidators: true,
     });
