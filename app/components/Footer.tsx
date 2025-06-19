@@ -2,10 +2,12 @@ import React from "react";
 import Logo from "./Logo";
 import NavBar from "./NavBar";
 import Link from "next/link";
+import BrandsBanner from "./BrandsBanner";
 
 export default function Footer() {
   return (
     <footer className=" bg-black text-white py-10">
+      <BrandsBanner />
       <hr className=" text-orange-400 border-2 w-3/4 m-auto" />
       <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 mt-10">
         <div className="flex justify-center md:justify-start">
