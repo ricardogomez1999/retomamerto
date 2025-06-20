@@ -45,7 +45,7 @@ export default function Hamburguer() {
                     </Link>
                   </li>
                   <li>
-                    <Link href={"/events"} onClick={() => setIsOpen(false)}>
+                    <Link href={"/calendar"} onClick={() => setIsOpen(false)}>
                       <p>Calendario</p>
                     </Link>
                   </li>
