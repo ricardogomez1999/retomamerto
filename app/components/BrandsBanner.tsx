@@ -21,12 +21,12 @@ export default function BrandsBanner() {
             />
           ))}
         </div>
-        <Link
+        <a
           href={"/https://wa.me/528443506065"}
           className=" mt-10 border-2 font-bold text-orange-400 border-orange-400 p-3 w-fit m-auto flex justify-center"
         >
           Hazte colaborador
-        </Link>
+        </a>
       </div>
     </div>
   );
