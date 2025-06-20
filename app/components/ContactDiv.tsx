@@ -23,18 +23,18 @@ export default function ContactDiv() {
               aria-label="Visit us on Instagram"
               className="text-gray-950 data-hover:text-gray-950/75"
               data-headlessui-state=""
-              href="https://www.instagram.com/suprugc?igsh=YTJwZGJueWw1c3l2&utm_source=qr"
+              href="https://www.instagram.com/retomamerto?igsh=MXRmdm05bXd3MGdzeQ=="
             >
               <svg
-                viewBox="0 0 16 16"
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
                 fill="currentColor"
-                className="size-4 text-white"
+                className="icon icon-tabler icons-tabler-filled icon-tabler-brand-instagram"
               >
-                <path
-                  fillRule="evenodd"
-                  clipRule="evenodd"
-                  d="M16 8.05C16 3.603 12.418 0 8 0S0 3.604 0 8.05c0 4.016 2.926 7.346 6.75 7.95v-5.624H4.718V8.05H6.75V6.276c0-2.017 1.194-3.131 3.022-3.131.875 0 1.79.157 1.79.157v1.98h-1.008c-.994 0-1.304.62-1.304 1.257v1.51h2.219l-.355 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.95z"
-                ></path>
+                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                <path d="M16 3a5 5 0 0 1 5 5v8a5 5 0 0 1 -5 5h-8a5 5 0 0 1 -5 -5v-8a5 5 0 0 1 5 -5zm-4 5a4 4 0 0 0 -3.995 3.8l-.005 .2a4 4 0 1 0 4 -4m4.5 -1.5a1 1 0 0 0 -.993 .883l-.007 .127a1 1 0 0 0 1.993 .117l.007 -.127a1 1 0 0 0 -1 -1" />
               </svg>
             </Link>
           </li>
