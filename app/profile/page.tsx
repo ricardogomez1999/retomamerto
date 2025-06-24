@@ -32,6 +32,7 @@ export default function ProfilePage() {
   const [weightInput, setWeightInput] = useState("");
   const [photoFile, setPhotoFile] = useState<File | null>(null);
 
+
   useEffect(() => {
     const stored = localStorage.getItem("user");
 
