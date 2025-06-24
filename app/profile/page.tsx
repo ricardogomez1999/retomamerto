@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import Image from "next/image";
 
 interface User {
@@ -20,23 +21,27 @@ export default function ProfilePage() {
   const [routines, setRoutines] = useState<
     { name: string; description: string }[]
   >([]);
+  const router = useRouter();
 
   useEffect(() => {
     const stored = localStorage.getItem("user");
 
-    if (stored) {
-      const parsedUser = (JSON.parse(stored) as { user: User }).user;
-
-      fetch(`/api/users/${parsedUser._id}`)
-        .then((res) => res.json())
-        .then(setUser)
-        .catch(() => {});
+    if (!stored) {
+      router.replace("/");
+      return;
     }
+
+    const parsedUser = (JSON.parse(stored) as { user: User }).user;
+
+    fetch(`/api/users/${parsedUser._id}`)
+      .then((res) => res.json())
+      .then(setUser)
+      .catch(() => {});
     fetch("/api/routines")
       .then((res) => res.json())
       .then(setRoutines)
       .catch(() => {});
-  }, []);
+  }, [router]);
 
   if (!user) {
     return (
