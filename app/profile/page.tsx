@@ -38,6 +38,12 @@ export default function ProfilePage() {
     return <div className="min-h-screen flex items-center justify-center">Cargando...</div>;
   }
 
+  const bmi =
+    user.currentWeight && user.height
+      ? user.currentWeight / Math.pow(user.height / 100, 2)
+      : null;
+  const inGoodShape = bmi !== null && bmi >= 18.5 && bmi < 25;
+
   return (
     <div className="p-6 max-w-2xl mx-auto text-white">
       <div className="flex flex-col items-center gap-4 bg-black/50 p-4 rounded-xl">
@@ -49,6 +55,12 @@ export default function ProfilePage() {
         <p>Sexo: {user.sex ?? "N/A"}</p>
         <p>Altura: {user.height ?? "N/A"} cm</p>
         <p>Peso actual: {user.currentWeight ?? "N/A"} kg</p>
+        {bmi !== null && (
+          <>
+            <p>Índice de masa corporal: {bmi.toFixed(2)}</p>
+            <p>{inGoodShape ? "En buena forma" : "Fuera de forma"}</p>
+          </>
+        )}
         {user.diet && (
           <div className="w-full mt-4">
             <h2 className="text-xl font-semibold mb-2">Dieta actual</h2>
