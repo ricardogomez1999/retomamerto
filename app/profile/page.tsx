@@ -6,6 +6,7 @@ import { Dialog } from "@headlessui/react";
 import { AnimatePresence, motion } from "framer-motion";
 import { XMarkIcon } from "@heroicons/react/16/solid";
 
+
 interface User {
   _id: string;
   name: string;
@@ -113,6 +114,7 @@ export default function ProfilePage() {
   };
 
   return (
+
     <div className="relative min-h-screen bg-[url(/bgMamerto.jpg)] bg-cover bg-center">
       <div className="absolute inset-0 bg-black/70" />
       <div className="relative max-w-3xl mx-auto pt-6 text-white">
@@ -170,8 +172,15 @@ export default function ProfilePage() {
                 Editar
               </button>
             </div>
+
           </div>
         </div>
+        <button
+          onClick={openEdit}
+          className="mt-4 bg-orange-500 px-4 py-2 rounded text-white"
+        >
+          Editar
+        </button>
       </div>
       <AnimatePresence>
         {isEditing && (

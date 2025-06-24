@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Reto Mamerto",
-  description: "Votaciones para el Reto Mamerto",
+  description: "Pagina del reto mamerto | Fitness",
 };
 
 export default function RootLayout({
