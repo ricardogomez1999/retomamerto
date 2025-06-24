@@ -17,13 +17,17 @@ interface User {
 
 export default function ProfilePage() {
   const [user, setUser] = useState<User | null>(null);
-  const [routines, setRoutines] = useState<{ name: string; description: string }[]>([]);
+  const [routines, setRoutines] = useState<
+    { name: string; description: string }[]
+  >([]);
 
   useEffect(() => {
-    const stored = localStorage.getItem("voter");
+    const stored = localStorage.getItem("user");
+
     if (stored) {
-      const candidate = JSON.parse(stored) as { _id: string };
-      fetch(`/api/users/${candidate._id}`)
+      const parsedUser = (JSON.parse(stored) as { user: User }).user;
+
+      fetch(`/api/users/${parsedUser._id}`)
         .then((res) => res.json())
         .then(setUser)
         .catch(() => {});
@@ -35,7 +39,11 @@ export default function ProfilePage() {
   }, []);
 
   if (!user) {
-    return <div className="min-h-screen flex items-center justify-center">Cargando...</div>;
+    return (
+      <div className="min-h-screen flex items-center justify-center text-white">
+        Cargando...
+      </div>
+    );
   }
 
   const bmi =
@@ -45,10 +53,16 @@ export default function ProfilePage() {
   const inGoodShape = bmi !== null && bmi >= 18.5 && bmi < 25;
 
   return (
-    <div className="p-6 max-w-2xl mx-auto text-white">
+    <div className="p-6 max-w-2xl mx-auto text-white z-10">
       <div className="flex flex-col items-center gap-4 bg-black/50 p-4 rounded-xl">
         {user.photo && (
-          <Image src={user.photo} alt={user.name} width={150} height={150} className="rounded-full" />
+          <Image
+            src={user.photo}
+            alt={user.name}
+            width={150}
+            height={150}
+            className="rounded-full"
+          />
         )}
         <h1 className="text-2xl font-bold">{user.name}</h1>
         <p>Edad: {user.age ?? "N/A"}</p>
