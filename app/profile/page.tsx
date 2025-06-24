@@ -2,9 +2,8 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
-import { Dialog } from "@headlessui/react";
-import { AnimatePresence, motion } from "framer-motion";
-import { XMarkIcon } from "@heroicons/react/16/solid";
+import { AnimatePresence } from "framer-motion";
+import EditDialog from "../components/EditDialog";
 
 interface User {
   _id: string;
@@ -31,7 +30,6 @@ export default function ProfilePage() {
   const [heightInput, setHeightInput] = useState("");
   const [weightInput, setWeightInput] = useState("");
   const [photoFile, setPhotoFile] = useState<File | null>(null);
-
 
   useEffect(() => {
     const stored = localStorage.getItem("user");
@@ -116,26 +114,31 @@ export default function ProfilePage() {
   return (
     <div className="p-6 max-w-2xl mx-auto text-white z-10">
       <div className="flex flex-col items-center gap-4 bg-black/50 p-4 rounded-xl">
-        {user.photo && (
-          <Image
-            src={user.photo}
-            alt={user.name}
-            width={150}
-            height={150}
-            className="rounded-full"
-          />
-        )}
-        <h1 className="text-2xl font-bold">{user.name}</h1>
-        <p>Edad: {user.age ?? "N/A"}</p>
-        <p>Sexo: {user.sex ?? "N/A"}</p>
-        <p>Altura: {user.height ?? "N/A"} cm</p>
-        <p>Peso actual: {user.currentWeight ?? "N/A"} kg</p>
-        {bmi !== null && (
-          <>
-            <p>Índice de masa corporal: {bmi.toFixed(2)}</p>
-            <p>{inGoodShape ? "En buena forma" : "Fuera de forma"}</p>
-          </>
-        )}
+        <div className=" flex gap-10">
+          {true && (
+            <Image
+              src={"/mamertos2.JPG"}
+              alt={user.name}
+              width={150}
+              height={150}
+              className="rounded-full"
+            />
+          )}
+          <div>
+            <h1 className="text-3xl font-bold">{user.name}</h1>
+            <p>Edad: {user.age ?? "N/A"} años</p>
+            <p>Sexo: {user.sex ?? "N/A"}</p>
+            <p>Altura: {user.height ?? "N/A"} cm</p>
+            <p>Peso actual: {user.currentWeight ?? "N/A"} kg</p>
+            {bmi !== null && (
+              <>
+                <p>Índice de masa corporal: {bmi.toFixed(2)}</p>
+                <p>{inGoodShape ? "En buena forma" : "Fuera de forma"}</p>
+              </>
+            )}
+          </div>
+        </div>
+
         {user.diet && (
           <div className="w-full mt-4">
             <h2 className="text-xl font-semibold mb-2">Dieta actual</h2>
@@ -161,72 +164,20 @@ export default function ProfilePage() {
       </div>
       <AnimatePresence>
         {isEditing && (
-          <Dialog
-            static
-            open={isEditing}
-            onClose={() => setIsEditing(false)}
-            className="relative z-50"
-          >
-            <div className="fixed inset-0 flex items-center justify-center bg-black/70">
-              <motion.div
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.95 }}
-                transition={{ duration: 0.3 }}
-                className="bg-white p-6 rounded-lg w-full max-w-md text-black relative"
-              >
-                <button
-                  onClick={() => setIsEditing(false)}
-                  className="absolute top-2 right-2 text-gray-600"
-                >
-                  <XMarkIcon width={20} height={20} />
-                </button>
-                <h2 className="text-xl font-bold mb-4">Editar perfil</h2>
-                <form onSubmit={handleSave} className="flex flex-col gap-3">
-                  <input
-                    type="number"
-                    placeholder="Edad"
-                    value={ageInput}
-                    onChange={(e) => setAgeInput(e.target.value)}
-                    className="border p-2 rounded"
-                  />
-                  <input
-                    type="text"
-                    placeholder="Sexo"
-                    value={sexInput}
-                    onChange={(e) => setSexInput(e.target.value)}
-                    className="border p-2 rounded"
-                  />
-                  <input
-                    type="number"
-                    placeholder="Altura (cm)"
-                    value={heightInput}
-                    onChange={(e) => setHeightInput(e.target.value)}
-                    className="border p-2 rounded"
-                  />
-                  <input
-                    type="number"
-                    placeholder="Peso actual (kg)"
-                    value={weightInput}
-                    onChange={(e) => setWeightInput(e.target.value)}
-                    className="border p-2 rounded"
-                  />
-                  <input
-                    type="file"
-                    accept="image/*"
-                    onChange={(e) => setPhotoFile(e.target.files?.[0] || null)}
-                    className="border p-2 rounded"
-                  />
-                  <button
-                    type="submit"
-                    className="bg-orange-500 text-white py-2 rounded mt-2"
-                  >
-                    Guardar
-                  </button>
-                </form>
-              </motion.div>
-            </div>
-          </Dialog>
+          <EditDialog
+            isEditing={isEditing}
+            setIsEditing={setIsEditing}
+            handleSave={handleSave}
+            ageInput={ageInput}
+            setAgeInput={setAgeInput}
+            setSexInput={setSexInput}
+            sexInput={sexInput}
+            heightInput={heightInput}
+            setHeightInput={setHeightInput}
+            setWeightInput={setWeightInput}
+            weightInput={weightInput}
+            setPhotoFile={setPhotoFile}
+          />
         )}
       </AnimatePresence>
     </div>
