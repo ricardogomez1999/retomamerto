@@ -11,6 +11,9 @@ export default function LoginPage() {
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
+    setError("");
+    console.log("Sending email:", email);
+    console.log("Sending password:", password);
 
     const res = await fetch("/api/auth/login", {
       method: "PUT",
@@ -18,7 +21,7 @@ export default function LoginPage() {
       body: JSON.stringify({ email, password }),
     });
 
-    const data = await res.json();
+    const data = await res.json().catch(() => ({}));
 
     if (!res.ok) {
       setError(data.message || "El Login fallo");

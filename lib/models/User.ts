@@ -17,12 +17,4 @@ const UserSchema = new Schema(
   { timestamps: true }
 );
 
-UserSchema.pre("save", async function (next) {
-  if (!this.isModified("password")) return next();
-  const bcrypt = await import("bcryptjs");
-  this.password = await bcrypt.hash(this.password, 10);
-  next();
-});
-
-
 export default models.User || model("User", UserSchema);

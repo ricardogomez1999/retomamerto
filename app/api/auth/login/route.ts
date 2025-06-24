@@ -8,15 +8,16 @@ export async function PUT(req: NextRequest) {
   const { email, password } = await req.json();
 
   try {
-    const user = await Users.findOne({ email });
+    const user = await Users.findOne({ email }).select("+password");
+
     if (!user) {
       return NextResponse.json(
         { message: "Usuario no valido" },
         { status: 401 }
       );
     }
-
     const isMatch = await bcrypt.compare(password, user.password);
+
     if (!isMatch) {
       return NextResponse.json(
         { message: "Contraseña incorrecta" },
@@ -24,14 +25,13 @@ export async function PUT(req: NextRequest) {
       );
     }
 
+    const { password: _, ...userSafe } = user.toObject();
     return NextResponse.json(
-      { message: "Login successful", user },
+      { message: "Login successful", user: userSafe },
       { status: 200 }
     );
   } catch (err) {
-    return NextResponse.json(
-      { message: "Internal Server Error", error: err },
-      { status: 500 }
-    );
+    console.error("Login error:", err);
+    return NextResponse.json({ message: String(err) }, { status: 500 });
   }
 }
