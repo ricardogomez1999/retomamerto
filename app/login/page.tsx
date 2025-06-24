@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 
@@ -8,6 +8,21 @@ export default function LoginPage() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const router = useRouter();
+
+  // Remove stale login data if it exists
+  useEffect(() => {
+    const stored = localStorage.getItem("user");
+    if (stored) {
+      try {
+        const parsed = JSON.parse(stored);
+        if (parsed.expiry && Date.now() > parsed.expiry) {
+          localStorage.removeItem("user");
+        }
+      } catch {
+        localStorage.removeItem("user");
+      }
+    }
+  }, []);
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -26,7 +41,11 @@ export default function LoginPage() {
     if (!res.ok) {
       setError(data.message || "El Login fallo");
     } else {
-      localStorage.setItem("user", JSON.stringify(data));
+      const expiry = Date.now() + 24 * 60 * 60 * 1000;
+      localStorage.setItem(
+        "user",
+        JSON.stringify({ ...data, expiry })
+      );
       router.push("/profile");
     }
   };
