@@ -6,6 +6,49 @@ import { Dialog } from "@headlessui/react";
 import { AnimatePresence, motion } from "framer-motion";
 import { PencilSquareIcon, XMarkIcon } from "@heroicons/react/16/solid";
 
+function ProgressCircle({ progress }: { progress: number }) {
+  const radius = 40;
+  const stroke = 8;
+  const normalizedRadius = radius - stroke / 2;
+  const circumference = 2 * Math.PI * normalizedRadius;
+  const offset = circumference - (progress / 100) * circumference;
+
+  return (
+    <svg height={radius * 2} width={radius * 2} className="text-white">
+      <circle
+        stroke="currentColor"
+        className="text-gray-700"
+        fill="transparent"
+        strokeWidth={stroke}
+        r={normalizedRadius}
+        cx={radius}
+        cy={radius}
+      />
+      <circle
+        stroke="currentColor"
+        className="text-orange-500"
+        fill="transparent"
+        strokeWidth={stroke}
+        strokeLinecap="round"
+        strokeDasharray={circumference}
+        strokeDashoffset={offset}
+        r={normalizedRadius}
+        cx={radius}
+        cy={radius}
+      />
+      <text
+        x="50%"
+        y="50%"
+        dominantBaseline="middle"
+        textAnchor="middle"
+        className="text-xs font-semibold fill-white"
+      >
+        {Math.round(progress)}%
+      </text>
+    </svg>
+  );
+}
+
 interface User {
   _id: string;
   name: string;
@@ -15,6 +58,8 @@ interface User {
   sex?: string;
   height?: number;
   currentWeight?: number;
+  targetWeight?: number;
+  weightHistory?: { weight: number; date: string }[];
   diet?: string;
   gymRoutine?: string;
 }
@@ -30,6 +75,7 @@ export default function ProfilePage() {
   const [sexInput, setSexInput] = useState("");
   const [heightInput, setHeightInput] = useState("");
   const [weightInput, setWeightInput] = useState("");
+  const [targetWeightInput, setTargetWeightInput] = useState("");
   const [photoFile, setPhotoFile] = useState<File | null>(null);
 
   useEffect(() => {
@@ -65,6 +111,20 @@ export default function ProfilePage() {
       ? user.currentWeight / Math.pow(user.height / 100, 2)
       : null;
   const inGoodShape = bmi !== null && bmi >= 18.5 && bmi < 25;
+  const startWeight =
+    user.weightHistory && user.weightHistory.length > 0
+      ? user.weightHistory[0].weight
+      : user.currentWeight;
+  const total =
+    startWeight !== undefined && user.targetWeight !== undefined
+      ? Math.abs(startWeight - user.targetWeight)
+      : null;
+  const progress =
+    total !== null && total !== 0 && user.currentWeight !== undefined
+      ?
+        ((total - Math.abs(user.currentWeight - user.targetWeight!)) / total) *
+        100
+      : null;
 
   const openEdit = () => {
     if (user) {
@@ -72,6 +132,7 @@ export default function ProfilePage() {
       setSexInput(user.sex ?? "");
       setHeightInput(user.height?.toString() ?? "");
       setWeightInput(user.currentWeight?.toString() ?? "");
+      setTargetWeightInput(user.targetWeight?.toString() ?? "");
       setPhotoFile(null);
     }
     setIsEditing(true);
@@ -101,6 +162,14 @@ export default function ProfilePage() {
         sex: sexInput || undefined,
         height: heightInput ? Number(heightInput) : undefined,
         currentWeight: weightInput ? Number(weightInput) : undefined,
+        targetWeight: targetWeightInput ? Number(targetWeightInput) : undefined,
+        weightHistory:
+          weightInput && Number(weightInput) !== user.currentWeight
+            ? [
+                ...(user.weightHistory || []),
+                { weight: Number(weightInput), date: new Date().toISOString() },
+              ]
+            : undefined,
         photo: photoUrl,
       }),
     });
@@ -179,6 +248,12 @@ export default function ProfilePage() {
                   />{" "}
                   {user.currentWeight ?? "N/A"} kg
                 </p>
+                {user.targetWeight && progress !== null && (
+                  <div className="flex items-center gap-2 mt-2">
+                    <ProgressCircle progress={progress} />
+                    <span className="text-sm">Objetivo: {user.targetWeight} kg</span>
+                  </div>
+                )}
               </div>
             </div>
 
@@ -267,6 +342,13 @@ export default function ProfilePage() {
                     placeholder="Peso actual (kg)"
                     value={weightInput}
                     onChange={(e) => setWeightInput(e.target.value)}
+                    className="border p-2 rounded"
+                  />
+                  <input
+                    type="number"
+                    placeholder="Peso objetivo (kg)"
+                    value={targetWeightInput}
+                    onChange={(e) => setTargetWeightInput(e.target.value)}
                     className="border p-2 rounded"
                   />
                   <input
