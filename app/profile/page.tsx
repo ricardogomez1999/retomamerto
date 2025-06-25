@@ -121,8 +121,7 @@ export default function ProfilePage() {
       : null;
   const progress =
     total !== null && total !== 0 && user.currentWeight !== undefined
-      ?
-        ((total - Math.abs(user.currentWeight - user.targetWeight!)) / total) *
+      ? ((total - Math.abs(user.currentWeight - user.targetWeight!)) / total) *
         100
       : null;
 
@@ -248,22 +247,27 @@ export default function ProfilePage() {
                   />{" "}
                   {user.currentWeight ?? "N/A"} kg
                 </p>
-                {user.targetWeight && progress !== null && (
-                  <div className="flex items-center gap-2 mt-2">
-                    <ProgressCircle progress={progress} />
-                    <span className="text-sm">Objetivo: {user.targetWeight} kg</span>
-                  </div>
-                )}
               </div>
             </div>
 
             <div className="pt-20 flex">
-              {bmi !== null && (
-                <div className=" w-1/2">
-                  <p>IMC: {bmi.toFixed(2)}</p>
-                  <p>{inGoodShape ? "En buena forma" : "Fuera de forma"}</p>
-                </div>
-              )}
+              <div className=" w-1/2">
+                {bmi !== null && (
+                  <div>
+                    <p>IMC: {bmi.toFixed(2)}</p>
+                    <p>{inGoodShape ? "En buena forma" : "Fuera de forma"}</p>
+                  </div>
+                )}
+                {user.targetWeight && progress !== null && (
+                  <div className="flex flex-col items-center gap-2 mt-2">
+                    <ProgressCircle progress={progress} />
+                    <span className="text-sm">
+                      Objetivo: {user.targetWeight} kg
+                    </span>
+                  </div>
+                )}
+              </div>
+
               {user.diet && (
                 <div className="w-full mt-4">
                   <h2 className="text-xl font-semibold mb-2">Dieta actual</h2>
