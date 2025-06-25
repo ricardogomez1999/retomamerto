@@ -1,6 +1,5 @@
 import React from "react";
 import ProgressBar from "./ProgressBar";
-import { progress } from "framer-motion";
 
 type ProgressBarCard = {
   progress: number | null;

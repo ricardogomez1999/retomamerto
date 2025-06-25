@@ -4,7 +4,6 @@ import DietCard from "./DietCard";
 import RoutinesCard from "./RoutinesCard";
 import { PencilSquareIcon } from "@heroicons/react/16/solid";
 import { User } from "@/app/profile/page";
-import ProgressBar from "./ProgressBar";
 import ProgressBarCard from "./ProgressBarCard";
 
 type MainProfileProps = {
