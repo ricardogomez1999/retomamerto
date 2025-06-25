@@ -9,7 +9,7 @@ type RoutinesCard = {
 
 export default function RoutinesCard({ routines }: RoutinesCard) {
   return (
-    <div className=" flex flex-col gap-5 md:w-1/2 p-4 bg-black/70 rounded-xl h-40 shadow-lg justify-center overflow-auto">
+    <div className=" flex flex-col gap-5 md:w-1/2 p-4 bg-black/70 rounded-xl h-40 shadow-lg justify-center overflow-x-auto pt-30 md:pt-32">
       <h2 className="text-xl font-semibold mb-2">Rutinas de gimnasio</h2>
       <ul className="list-disc pl-5 space-y-2">
         {routines.map((r) => (
