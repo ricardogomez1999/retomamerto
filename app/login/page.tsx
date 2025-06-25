@@ -27,8 +27,6 @@ export default function LoginPage() {
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
-    console.log("Sending email:", email);
-    console.log("Sending password:", password);
 
     const res = await fetch("/api/auth/login", {
       method: "PUT",
@@ -40,12 +38,10 @@ export default function LoginPage() {
 
     if (!res.ok) {
       setError(data.message || "El Login fallo");
+      console.log(error);
     } else {
       const expiry = Date.now() + 24 * 60 * 60 * 1000;
-      localStorage.setItem(
-        "user",
-        JSON.stringify({ ...data, expiry })
-      );
+      localStorage.setItem("user", JSON.stringify({ ...data, expiry }));
       router.push("/profile");
     }
   };
