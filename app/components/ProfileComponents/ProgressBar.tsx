@@ -39,7 +39,7 @@ export default function ProgressBar({ progress }: ProgressBarType) {
         y="50%"
         dominantBaseline="middle"
         textAnchor="middle"
-        className="text-xs font-semibold fill-black"
+        className="text-xs font-semibold fill-white"
       >
         {Math.round(progress!)}%
       </text>

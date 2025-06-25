@@ -24,7 +24,7 @@ export default function BMIIndicator({ bmi }: BMIIndicatorProps) {
             }`}
           >
             {activeIndex === index && (
-              <p className="block mt-1 text-center text-sm text-white font-bold">
+              <p className="block mt-1 text-center text-xs p-1 text-white font-bold">
                 {category.label}
               </p>
             )}
