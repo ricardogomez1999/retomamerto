@@ -5,49 +5,8 @@ import Image from "next/image";
 import { Dialog } from "@headlessui/react";
 import { AnimatePresence, motion } from "framer-motion";
 import { PencilSquareIcon, XMarkIcon } from "@heroicons/react/16/solid";
-
-function ProgressCircle({ progress }: { progress: number }) {
-  const radius = 40;
-  const stroke = 8;
-  const normalizedRadius = radius - stroke / 2;
-  const circumference = 2 * Math.PI * normalizedRadius;
-  const offset = circumference - (progress / 100) * circumference;
-
-  return (
-    <svg height={radius * 2} width={radius * 2} className="text-white">
-      <circle
-        stroke="currentColor"
-        className="text-gray-700"
-        fill="transparent"
-        strokeWidth={stroke}
-        r={normalizedRadius}
-        cx={radius}
-        cy={radius}
-      />
-      <circle
-        stroke="currentColor"
-        className="text-orange-500"
-        fill="transparent"
-        strokeWidth={stroke}
-        strokeLinecap="round"
-        strokeDasharray={circumference}
-        strokeDashoffset={offset}
-        r={normalizedRadius}
-        cx={radius}
-        cy={radius}
-      />
-      <text
-        x="50%"
-        y="50%"
-        dominantBaseline="middle"
-        textAnchor="middle"
-        className="text-xs font-semibold fill-white"
-      >
-        {Math.round(progress)}%
-      </text>
-    </svg>
-  );
-}
+import BMIIndicator from "../components/ProfileComponents/BMIIndicator";
+import ProgressBar from "../components/ProfileComponents/ProgressBar";
 
 interface User {
   _id: string;
@@ -238,42 +197,24 @@ export default function ProfilePage() {
                   />{" "}
                   {user.height ?? "N/A"} cm
                 </p>
-                <p className=" flex gap-1">
-                  <Image
-                    src={"/weight.svg"}
-                    alt="height icon"
-                    width={20}
-                    height={20}
-                  />{" "}
-                  {user.currentWeight ?? "N/A"} kg
-                </p>
               </div>
             </div>
 
             <div className="pt-20 flex">
-              <div className=" w-1/2">
-                {bmi !== null && (
-                  <div>
-                    <p>IMC: {bmi.toFixed(2)}</p>
-                    <p>{inGoodShape ? "En buena forma" : "Fuera de forma"}</p>
-                  </div>
-                )}
-                {user.targetWeight && progress !== null && (
-                  <div className="flex flex-col items-center gap-2 mt-2">
-                    <ProgressCircle progress={progress} />
-                    <span className="text-sm">
-                      Objetivo: {user.targetWeight} kg
-                    </span>
-                  </div>
-                )}
+              <div className=" flex flex-col gap-5 w-1/2 p-4 bg-white rounded-xl">
+                <h1 className=" text-4xl text-center text-black font-bold">
+                  {user.currentWeight ?? "N/A"} kg
+                  <p className=" text-sm text-gray-400">peso actual</p>
+                </h1>
+                {bmi !== null && <BMIIndicator bmi={bmi} />}
               </div>
 
-              {user.diet && (
+              {/* {user.diet && (
                 <div className="w-full mt-4">
                   <h2 className="text-xl font-semibold mb-2">Dieta actual</h2>
                   <p className="whitespace-pre-line">{user.diet}</p>
                 </div>
-              )}
+              )} */}
               <div className="w-full mt-4">
                 <h2 className="text-xl font-semibold mb-2">
                   Rutinas de gimnasio

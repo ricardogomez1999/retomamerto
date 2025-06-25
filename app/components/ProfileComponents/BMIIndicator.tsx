@@ -20,14 +20,15 @@ export default function BMIIndicator({ bmi }: BMIIndicatorProps) {
         <div key={index} className="flex-1 relative">
           <div
             className={`${category.color} rounded-full w-full ${
-              activeIndex === index ? "h-[10px]" : "h-[5px]"
+              activeIndex === index ? "h-full" : "h-[5px]"
             }`}
-          />
-          {activeIndex === index && (
-            <span className="block mt-1 text-center text-sm text-white">
-              IMC: {category.label}
-            </span>
-          )}
+          >
+            {activeIndex === index && (
+              <p className="block mt-1 text-center text-sm text-white font-bold">
+                {category.label}
+              </p>
+            )}
+          </div>
         </div>
       ))}
     </div>
