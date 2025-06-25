@@ -76,7 +76,6 @@ export default function ProfilePage() {
     startWeight !== undefined && user.targetWeight !== undefined
       ? Math.abs(startWeight - user.targetWeight)
       : null;
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const progress =
     total !== null && total !== 0 && user.currentWeight !== undefined
       ? ((total - Math.abs(user.currentWeight - user.targetWeight!)) / total) *
@@ -152,6 +151,7 @@ export default function ProfilePage() {
               user={user}
               openEdit={openEdit}
               routines={routines}
+              progress={progress}
             />
           </div>
         </div>

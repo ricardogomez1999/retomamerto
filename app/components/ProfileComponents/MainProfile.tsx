@@ -4,6 +4,8 @@ import DietCard from "./DietCard";
 import RoutinesCard from "./RoutinesCard";
 import { PencilSquareIcon } from "@heroicons/react/16/solid";
 import { User } from "@/app/profile/page";
+import ProgressBar from "./ProgressBar";
+import ProgressBarCard from "./ProgressBarCard";
 
 type MainProfileProps = {
   bmi: number | null;
@@ -13,6 +15,7 @@ type MainProfileProps = {
     name: string;
     description: string;
   }[];
+  progress: number | null;
 };
 
 export default function MainProfile({
@@ -20,11 +23,12 @@ export default function MainProfile({
   user,
   openEdit,
   routines,
+  progress,
 }: MainProfileProps) {
   return (
-    <div className="pt-20 flex gap-2">
+    <div className="pt-20 flex flex-col md:flex-row gap-2">
       <CardBMI bmi={bmi} user={user} />
-
+      <ProgressBarCard progress={progress} />
       {user.diet && <DietCard user={user} />}
       <RoutinesCard routines={routines} />
       <button

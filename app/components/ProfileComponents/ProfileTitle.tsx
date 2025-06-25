@@ -13,7 +13,7 @@ export default function ProfileTitle({ user }: ProfileTitleProps) {
         {user.name}, {user.age ?? "N/A"}
       </h1>
       <div className=" flex gap-3">
-        <p className=" flex gap-1 text-sm md:text-lg">
+        <p className=" flex gap-1 text-sm md:text-lg justify-center items-center">
           {user.sex === "male" ? (
             <Image
               src={"/male.svg"}
@@ -33,10 +33,7 @@ export default function ProfileTitle({ user }: ProfileTitleProps) {
           )}
           Hombre
         </p>
-        <div
-          className=" flex gap-1
-                "
-        >
+        <div className=" flex gap-1 justify-center items-center">
           <Image
             src={"/height.svg"}
             alt="height icon"
@@ -44,7 +41,7 @@ export default function ProfileTitle({ user }: ProfileTitleProps) {
             height={20}
             className=" w-5 h-5 md:w-6 md:h-6"
           />{" "}
-          <p className=" text-sm">{user.height ?? "N/A"} cm</p>
+          <p className=" text-sm md:text-lg">{user.height ?? "N/A"} cm</p>
         </div>
       </div>
     </div>

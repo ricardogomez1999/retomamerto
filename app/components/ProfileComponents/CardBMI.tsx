@@ -9,7 +9,7 @@ type CardBMIProps = {
 
 export default function CardBMI({ bmi, user }: CardBMIProps) {
   return (
-    <div className=" flex flex-col gap-5 w-1/2 p-4 bg-white rounded-xl h-full">
+    <div className=" flex flex-col gap-5 md:w-1/2 p-4 bg-white rounded-xl h-full">
       <h1 className=" text-4xl text-center text-black font-bold">
         {user.currentWeight ?? "N/A"} kg
         <p className=" text-sm text-gray-400">peso actual</p>
