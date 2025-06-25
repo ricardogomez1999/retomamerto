@@ -10,6 +10,13 @@ const UserSchema = new Schema(
     sex: String,
     height: Number,
     currentWeight: Number,
+    targetWeight: Number,
+    weightHistory: [
+      {
+        weight: Number,
+        date: { type: Date, default: Date.now },
+      },
+    ],
     diet: String,
     gymRoutine: String,
     role: { type: String, enum: ["user", "nutritionist"], default: "user" },
