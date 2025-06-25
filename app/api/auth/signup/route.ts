@@ -29,9 +29,8 @@ export async function POST(req: NextRequest) {
     const hashed = await bcrypt.hash(password, 10);
     const created = await User.create({ email, password: hashed, name, age });
 
-    const match = await bcrypt.compare(password, hashed);
-
-    const { password: _, ...userSafe } = created.toObject();
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { password: _unused, ...userSafe } = created.toObject();
     return NextResponse.json(userSafe, { status: 201 });
   } catch (err: unknown) {
     if (isValidationError(err)) {

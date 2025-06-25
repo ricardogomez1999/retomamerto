@@ -1,14 +1,13 @@
 "use client";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import Image from "next/image";
-import { Dialog } from "@headlessui/react";
-import { AnimatePresence, motion } from "framer-motion";
-import { PencilSquareIcon, XMarkIcon } from "@heroicons/react/16/solid";
-import BMIIndicator from "../components/ProfileComponents/BMIIndicator";
-import ProgressBar from "../components/ProfileComponents/ProgressBar";
+import ProfileTitle from "../components/ProfileComponents/ProfileTitle";
+import EditModal from "../components/ProfileComponents/EditModal";
+import MainProfile from "../components/ProfileComponents/MainProfile";
+import ProfilePicture from "../components/ProfileComponents/ProfilePicture";
+import CoverPicture from "../components/ProfileComponents/CoverPicture";
 
-interface User {
+export interface User {
   _id: string;
   name: string;
   email: string;
@@ -69,7 +68,6 @@ export default function ProfilePage() {
     user.currentWeight && user.height
       ? user.currentWeight / Math.pow(user.height / 100, 2)
       : null;
-  const inGoodShape = bmi !== null && bmi >= 18.5 && bmi < 25;
   const startWeight =
     user.weightHistory && user.weightHistory.length > 0
       ? user.weightHistory[0].weight
@@ -78,6 +76,7 @@ export default function ProfilePage() {
     startWeight !== undefined && user.targetWeight !== undefined
       ? Math.abs(startWeight - user.targetWeight)
       : null;
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const progress =
     total !== null && total !== 0 && user.currentWeight !== undefined
       ? ((total - Math.abs(user.currentWeight - user.targetWeight!)) / total) *
@@ -144,176 +143,35 @@ export default function ProfilePage() {
       <div className="absolute inset-0 bg-black/70" />
       <div className="relative max-w-3xl mx-auto pt-6 text-white">
         <div className="bg-black/60 rounded-lg shadow-lg overflow-hidden">
-          <div className="relative h-40 md:h-60">
-            <Image
-              src="/bgMamerto.jpg"
-              alt="Cover"
-              fill
-              className="object-cover w-full"
-            />
-          </div>
+          <CoverPicture />
           <div className="relative p-4 pb-6">
-            {true && (
-              <Image
-                src={"/mamertos2.JPG"}
-                alt={user.name}
-                width={150}
-                height={150}
-                className="rounded-full border-4 border-white absolute -top-16 left-4 w-32 h-32 object-cover"
-              />
-            )}
-            <div className="absolute top-2 right-1/4 md:left-1/5">
-              <h1 className="text-2xl font-bold ">
-                {user.name}, {user.age ?? "N/A"}
-              </h1>
-              <div className=" flex gap-3">
-                <p className=" flex gap-1">
-                  {user.sex === "male" ? (
-                    <Image
-                      src={"/male.svg"}
-                      alt="male"
-                      width={20}
-                      height={20}
-                    />
-                  ) : (
-                    <Image
-                      src={"/female.svg"}
-                      alt="male"
-                      width={20}
-                      height={20}
-                    />
-                  )}
-                  Hombre
-                </p>
-                <p
-                  className=" flex gap-1
-                "
-                >
-                  <Image
-                    src={"/height.svg"}
-                    alt="height icon"
-                    width={20}
-                    height={20}
-                  />{" "}
-                  {user.height ?? "N/A"} cm
-                </p>
-              </div>
-            </div>
-
-            <div className="pt-20 flex">
-              <div className=" flex flex-col gap-5 w-1/2 p-4 bg-white rounded-xl">
-                <h1 className=" text-4xl text-center text-black font-bold">
-                  {user.currentWeight ?? "N/A"} kg
-                  <p className=" text-sm text-gray-400">peso actual</p>
-                </h1>
-                {bmi !== null && <BMIIndicator bmi={bmi} />}
-              </div>
-
-              {/* {user.diet && (
-                <div className="w-full mt-4">
-                  <h2 className="text-xl font-semibold mb-2">Dieta actual</h2>
-                  <p className="whitespace-pre-line">{user.diet}</p>
-                </div>
-              )} */}
-              <div className="w-full mt-4">
-                <h2 className="text-xl font-semibold mb-2">
-                  Rutinas de gimnasio
-                </h2>
-                <ul className="list-disc pl-5 space-y-2">
-                  {routines.map((r) => (
-                    <li key={r.name}>
-                      <strong>{r.name}:</strong> {r.description}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <button
-                onClick={openEdit}
-                className="mt-4 bg-orange-500 p-1 rounded text-white absolute -top-2 right-2 cursor-pointer"
-              >
-                <PencilSquareIcon width={25} />
-              </button>
-            </div>
+            <ProfilePicture user={user} />
+            <ProfileTitle user={user} />
+            <MainProfile
+              bmi={bmi}
+              user={user}
+              openEdit={openEdit}
+              routines={routines}
+            />
           </div>
         </div>
       </div>
-      <AnimatePresence>
-        {isEditing && (
-          <Dialog
-            static
-            open={isEditing}
-            onClose={() => setIsEditing(false)}
-            className="relative z-50"
-          >
-            <div className="fixed inset-0 flex items-center justify-center bg-black/70">
-              <motion.div
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.95 }}
-                transition={{ duration: 0.3 }}
-                className="bg-white p-6 rounded-lg w-full max-w-md text-black relative"
-              >
-                <button
-                  onClick={() => setIsEditing(false)}
-                  className="absolute top-2 right-2 text-gray-600 cursor-pointer"
-                >
-                  <XMarkIcon width={20} height={20} />
-                </button>
-                <h2 className="text-xl font-bold mb-4">Editar perfil</h2>
-                <form onSubmit={handleSave} className="flex flex-col gap-3">
-                  <input
-                    type="number"
-                    placeholder="Edad"
-                    value={ageInput}
-                    onChange={(e) => setAgeInput(e.target.value)}
-                    className="border p-2 rounded"
-                  />
-                  <input
-                    type="text"
-                    placeholder="Sexo"
-                    value={sexInput}
-                    onChange={(e) => setSexInput(e.target.value)}
-                    className="border p-2 rounded"
-                  />
-                  <input
-                    type="number"
-                    placeholder="Altura (cm)"
-                    value={heightInput}
-                    onChange={(e) => setHeightInput(e.target.value)}
-                    className="border p-2 rounded"
-                  />
-                  <input
-                    type="number"
-                    placeholder="Peso actual (kg)"
-                    value={weightInput}
-                    onChange={(e) => setWeightInput(e.target.value)}
-                    className="border p-2 rounded"
-                  />
-                  <input
-                    type="number"
-                    placeholder="Peso objetivo (kg)"
-                    value={targetWeightInput}
-                    onChange={(e) => setTargetWeightInput(e.target.value)}
-                    className="border p-2 rounded"
-                  />
-                  <input
-                    type="file"
-                    accept="image/*"
-                    onChange={(e) => setPhotoFile(e.target.files?.[0] || null)}
-                    className="border p-2 rounded"
-                  />
-                  <button
-                    type="submit"
-                    className="bg-orange-500 text-white py-2 rounded mt-2 transition-all hover:bg-orange-600 cursor-pointer"
-                  >
-                    Guardar
-                  </button>
-                </form>
-              </motion.div>
-            </div>
-          </Dialog>
-        )}
-      </AnimatePresence>
+      <EditModal
+        setIsEditing={setIsEditing}
+        isEditing={isEditing}
+        handleSave={handleSave}
+        ageInput={ageInput}
+        setAgeInput={setAgeInput}
+        sexInput={sexInput}
+        setSexInput={setSexInput}
+        heightInput={heightInput}
+        setHeightInput={setHeightInput}
+        weightInput={weightInput}
+        setWeightInput={setWeightInput}
+        targetWeightInput={targetWeightInput}
+        setTargetWeightInput={setTargetWeightInput}
+        setPhotoFile={setPhotoFile}
+      />
     </div>
   );
 }

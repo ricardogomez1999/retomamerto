@@ -24,8 +24,8 @@ export async function PUT(req: NextRequest) {
         { status: 401 }
       );
     }
-
-    const { password: _, ...userSafe } = user.toObject();
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { password: _unused, ...userSafe } = user.toObject();
     return NextResponse.json(
       { message: "Login successful", user: userSafe },
       { status: 200 }
