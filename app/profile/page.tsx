@@ -4,8 +4,7 @@ import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { Dialog } from "@headlessui/react";
 import { AnimatePresence, motion } from "framer-motion";
-import { XMarkIcon } from "@heroicons/react/16/solid";
-
+import { PencilSquareIcon, XMarkIcon } from "@heroicons/react/16/solid";
 
 interface User {
   _id: string;
@@ -114,7 +113,6 @@ export default function ProfilePage() {
   };
 
   return (
-
     <div className="relative min-h-screen bg-[url(/bgMamerto.jpg)] bg-cover bg-center">
       <div className="absolute inset-0 bg-black/70" />
       <div className="relative max-w-3xl mx-auto pt-6 text-white">
@@ -128,26 +126,68 @@ export default function ProfilePage() {
             />
           </div>
           <div className="relative p-4 pb-6">
-            {user.photo && (
+            {true && (
               <Image
-                src={user.photo}
+                src={"/mamertos2.JPG"}
                 alt={user.name}
                 width={150}
                 height={150}
                 className="rounded-full border-4 border-white absolute -top-16 left-4 w-32 h-32 object-cover"
               />
             )}
-            <div className="pt-20 pl-40">
-              <h1 className="text-2xl font-bold">{user.name}</h1>
-              <p>Edad: {user.age ?? "N/A"}</p>
-              <p>Sexo: {user.sex ?? "N/A"}</p>
-              <p>Altura: {user.height ?? "N/A"} cm</p>
-              <p>Peso actual: {user.currentWeight ?? "N/A"} kg</p>
+            <div className="absolute top-2 right-1/4 md:left-1/5">
+              <h1 className="text-2xl font-bold ">
+                {user.name}, {user.age ?? "N/A"}
+              </h1>
+              <div className=" flex gap-3">
+                <p className=" flex gap-1">
+                  {user.sex === "male" ? (
+                    <Image
+                      src={"/male.svg"}
+                      alt="male"
+                      width={20}
+                      height={20}
+                    />
+                  ) : (
+                    <Image
+                      src={"/female.svg"}
+                      alt="male"
+                      width={20}
+                      height={20}
+                    />
+                  )}
+                  Hombre
+                </p>
+                <p
+                  className=" flex gap-1
+                "
+                >
+                  <Image
+                    src={"/height.svg"}
+                    alt="height icon"
+                    width={20}
+                    height={20}
+                  />{" "}
+                  {user.height ?? "N/A"} cm
+                </p>
+                <p className=" flex gap-1">
+                  <Image
+                    src={"/weight.svg"}
+                    alt="height icon"
+                    width={20}
+                    height={20}
+                  />{" "}
+                  {user.currentWeight ?? "N/A"} kg
+                </p>
+              </div>
+            </div>
+
+            <div className="pt-20 flex">
               {bmi !== null && (
-                <>
-                  <p>Índice de masa corporal: {bmi.toFixed(2)}</p>
+                <div className=" w-1/2">
+                  <p>IMC: {bmi.toFixed(2)}</p>
                   <p>{inGoodShape ? "En buena forma" : "Fuera de forma"}</p>
-                </>
+                </div>
               )}
               {user.diet && (
                 <div className="w-full mt-4">
@@ -156,7 +196,9 @@ export default function ProfilePage() {
                 </div>
               )}
               <div className="w-full mt-4">
-                <h2 className="text-xl font-semibold mb-2">Rutinas de gimnasio</h2>
+                <h2 className="text-xl font-semibold mb-2">
+                  Rutinas de gimnasio
+                </h2>
                 <ul className="list-disc pl-5 space-y-2">
                   {routines.map((r) => (
                     <li key={r.name}>
@@ -167,20 +209,13 @@ export default function ProfilePage() {
               </div>
               <button
                 onClick={openEdit}
-                className="mt-4 bg-orange-500 px-4 py-2 rounded text-white"
+                className="mt-4 bg-orange-500 p-1 rounded text-white absolute -top-2 right-2 cursor-pointer"
               >
-                Editar
+                <PencilSquareIcon width={25} />
               </button>
             </div>
-
           </div>
         </div>
-        <button
-          onClick={openEdit}
-          className="mt-4 bg-orange-500 px-4 py-2 rounded text-white"
-        >
-          Editar
-        </button>
       </div>
       <AnimatePresence>
         {isEditing && (
@@ -200,7 +235,7 @@ export default function ProfilePage() {
               >
                 <button
                   onClick={() => setIsEditing(false)}
-                  className="absolute top-2 right-2 text-gray-600"
+                  className="absolute top-2 right-2 text-gray-600 cursor-pointer"
                 >
                   <XMarkIcon width={20} height={20} />
                 </button>
@@ -242,7 +277,7 @@ export default function ProfilePage() {
                   />
                   <button
                     type="submit"
-                    className="bg-orange-500 text-white py-2 rounded mt-2"
+                    className="bg-orange-500 text-white py-2 rounded mt-2 transition-all hover:bg-orange-600 cursor-pointer"
                   >
                     Guardar
                   </button>
